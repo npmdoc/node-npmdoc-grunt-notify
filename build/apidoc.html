@@ -1,0 +1,323 @@
+<div class="apidocDiv">
+<style>
+/*csslint
+*/
+.apidocDiv {
+    background: #fff;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.apidocDiv a[href] {
+    color: #33f;
+    font-weight: bold;
+    text-decoration: none;
+}
+.apidocDiv a[href]:hover {
+    text-decoration: underline;
+}
+.apidocCodeCommentSpan {
+    background: #bbf;
+    color: #000;
+    display: block;
+}
+.apidocCodeKeywordSpan {
+    color: #d00;
+    font-weight: bold;
+}
+.apidocCodePre {
+    background: #eef;
+    border: 1px solid;
+    color: #777;
+    padding: 5px;
+    white-space: pre-wrap;
+}
+.apidocFooterDiv {
+    margin-top: 20px;
+    text-align: center;
+}
+.apidocModuleLi {
+    margin-top: 10px;
+}
+.apidocSectionDiv {
+    border-top: 1px solid;
+    margin-top: 20px;
+}
+.apidocSignatureSpan {
+    color: #777;
+    font-weight: bold;
+}
+</style>
+<h1>api documentation for
+    <a
+
+        href="https://github.com/dylang/grunt-notify"
+
+    >grunt-notify (v0.4.5)</a>
+</h1>
+<h4>Automatic desktop notifications for Grunt errors and warnings. Supports OS X, Windows, Linux.</h4>
+<div class="apidocSectionDiv"><a
+    href="#apidoc.tableOfContents"
+    id="apidoc.tableOfContents"
+><h1>table of contents</h1></a><ol>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.grunt-notify">module grunt-notify</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.grunt-notify.grunt-notify">
+            function <span class="apidocSignatureSpan"></span>grunt-notify
+            <span class="apidocSignatureSpan">(grunt)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">object <span class="apidocSignatureSpan">grunt-notify.</span>no_notifications</span>
+
+        </li>
+
+    </ol></li>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.grunt-notify.no_notifications">module grunt-notify.no_notifications</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.grunt-notify.no_notifications.notify">
+            function <span class="apidocSignatureSpan">grunt-notify.no_notifications.</span>notify
+            <span class="apidocSignatureSpan">(options, cb)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.grunt-notify.no_notifications.supported">
+            function <span class="apidocSignatureSpan">grunt-notify.no_notifications.</span>supported
+            <span class="apidocSignatureSpan">(options)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">string <span class="apidocSignatureSpan">grunt-notify.no_notifications.</span>name</span>
+
+        </li>
+
+    </ol></li>
+
+</ol></div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.grunt-notify" id="apidoc.module.grunt-notify">module grunt-notify</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.grunt-notify.grunt-notify" id="apidoc.element.grunt-notify.grunt-notify">
+        function <span class="apidocSignatureSpan"></span>grunt-notify
+        <span class="apidocSignatureSpan">(grunt)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">grunt-notify = function (grunt) {
+
+  require(&#x27;time-grunt&#x27;)(grunt);
+
+  grunt.initConfig({
+    // Configuration to be run (and then tested).
+    notify: {
+      custom_options: {
+        options: {
+          title: &#x27;Notify Title&#x27;,
+          message: &#x27;This is a &#x22;Notify Message&#x22; test!&#x27;
+        }
+      },
+      just_message: {
+        options: {
+          message: &#x27;Just Message&#x27;
+        }
+      },
+      example: {
+        options: {
+          title: &#x27;Doodle or Die&#x27;,  // optional
+          message: &#x27;Deploy to production success!&#x27; //required
+        }
+      },
+      directory: {
+        options: {
+          title: &#x27;Directory&#x27;,
+          message: &#x27;Look in c:\\temp\\new\\ or /var/tmp/new.&#x27;
+        }
+      },
+      newlines: {
+        options: {
+          title: &#x27;Directory&#x27;,
+          message: &#x27;Line 1\nLine 2\nLine3\nLine 4\nLine 5.&#x27;
+        }
+      }
+    },
+
+    watch: {
+      example: {
+        options: {
+          spawn: true
+        },
+        files: [
+          &#x27;Gruntfile.js&#x27;,
+          &#x27;tasks/**/*.js&#x27;,
+          &#x27;test/**/*.js&#x27;
+        ],
+        tasks: [
+          &#x27;notify:custom_options&#x27;
+        ]
+      },
+      test: {
+        options: {
+          spawn: true
+        },
+        files: [
+          &#x27;Gruntfile.js&#x27;,
+          &#x27;tasks/**/*.js&#x27;,
+          &#x27;test/**/*.js&#x27;
+        ],
+        tasks: [
+          &#x27;jshint&#x27;,
+          &#x27;mochaTest&#x27;
+        ]
+      }
+    },
+
+    mochaTest: {
+      notify: {
+          src: &#x27;test/**/*.test.js&#x27;,
+          options: {
+              reporter: &#x27;spec&#x27;
+          }
+      }
+    },
+
+    jshint: {
+      options: {
+        jshintrc: &#x27;.jshintrc&#x27;,
+        force: true
+      },
+      all: [
+        &#x27;Gruntfile.js&#x27;,
+        &#x27;tasks/**/*.js&#x27;,
+        &#x27;tests/**/*&#x27;,
+        &#x27;lib/**/*&#x27;
+      ],
+      fixtures: [
+        &#x27;test/fixtures/*.js&#x27;
+      ]
+    }
+
+  });
+
+  require(&#x27;load-grunt-tasks&#x27;)(grunt);
+  grunt.loadTasks(&#x27;tasks&#x27;);
+
+  // Whenever the &#x22;test&#x22; task is run, first clean the &#x22;tmp&#x22; dir, then run this
+  // plugin&#x27;s task(s), then test the result.
+  grunt.registerTask(&#x27;test&#x27;, [
+    &#x27;jshint&#x27;,
+    &#x27;notify&#x27;,
+    &#x27;mochaTest&#x27;
+  ]);
+
+  // By default, lint and run all tests.
+  grunt.registerTask(&#x27;default&#x27;, [
+    &#x27;test&#x27;
+  ]);
+
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+
+</div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.grunt-notify.no_notifications" id="apidoc.module.grunt-notify.no_notifications">module grunt-notify.no_notifications</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.grunt-notify.no_notifications.notify" id="apidoc.element.grunt-notify.no_notifications.notify">
+        function <span class="apidocSignatureSpan">grunt-notify.no_notifications.</span>notify
+        <span class="apidocSignatureSpan">(options, cb)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function notify(options, cb) {
+  options.debug({
+    title: options.title,
+    message: options.message
+  });
+  cb();
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+  return;
+}
+
+resetPreviousTimer(options.message);
+
+options.debug = debug(notifyPlatform.name); //for debug logging
+
+return notifyPlatform.<span class="apidocCodeKeywordSpan">notify</span>(options, function(err){
+    if (err) {
+      options.debug({
+        return_code: err
+      });
+    }
+    if (typeof cb === &#x27;function&#x27;) {
+      cb(err);
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.grunt-notify.no_notifications.supported" id="apidoc.element.grunt-notify.no_notifications.supported">
+        function <span class="apidocSignatureSpan">grunt-notify.no_notifications.</span>supported
+        <span class="apidocSignatureSpan">(options)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function supported(options) {
+  options.debug({
+    fallback: &#x27;No supported notification systems were found&#x27;
+  });
+  return true;
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+
+var options = { debug: debug(&#x27;grunt-notify&#x27;)};
+
+// This needs to be cleaned up to make it easier to add new platforms
+
+var growl_notify = require(&#x27;./platforms/growl-notify&#x27;);
+
+if (growl_notify.<span class="apidocCodeKeywordSpan">supported</span>(options)) {
+  return growl_notify;
+}
+
+var hey_snarl = require(&#x27;./platforms/hey-snarl&#x27;);
+
+if (hey_snarl.supported(options)) {
+  return hey_snarl;
+...</pre></li>
+    </ul>
+
+
+
+
+</div>
+
+<div class="apidocFooterDiv">
+    [ this document was created with
+    <a href="https://github.com/kaizhu256/node-utility2" target="_blank">utility2</a>
+    ]
+</div>
+</div>
